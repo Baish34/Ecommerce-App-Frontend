@@ -42,7 +42,7 @@ const Home = () => {
           src="/image1.jpg"
           className="img-fluid"
           alt="banner"
-          style={{ width: "1200px", height: "300px" }}
+          style={{ width: "1200px", height: "350px" }}
         />
       </div>
       <div className="container pt-5">

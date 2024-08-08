@@ -11,12 +11,26 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const CategoryProducts = () => {
   const dispatch = useDispatch();
-  const { filteredProducts, status, error, filters } = useSelector(
+  const { filteredProducts, status, error, filters, products } = useSelector(
     (state) => state.products,
   );
 
+  const categoryMap = {
+    "66754d915f83c7d0aad9ebf3": "Accessories",
+    "66754d915f83c7d0aad9ebf0": "Laptops",
+    "66754d915f83c7d0aad9ebf1": "Smartphones",
+    "66754d915f83c7d0aad9ebf2": "Cameras",
+  };
+
   const [ratingFilter, setRatingFilter] = useState(filters.rating || null);
   const [priceFilter, setPriceFilter] = useState(filters.price || "lowToHigh");
+  const [categoryFilter, setCategoryFilter] = useState(
+    filters.categories || [],
+  );
+
+  const categories = Array.from(
+    new Set(products.map((product) => categoryMap[product.category])),
+  );
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -27,9 +41,12 @@ const CategoryProducts = () => {
       setFilters({
         rating: ratingFilter,
         price: priceFilter,
+        categories: categoryFilter.map((name) =>
+          Object.keys(categoryMap).find((key) => categoryMap[key] === name),
+        ),
       }),
     );
-  }, [dispatch, ratingFilter, priceFilter]);
+  }, [dispatch, ratingFilter, priceFilter, categoryFilter]);
 
   const handleRatingChange = (e) => {
     setRatingFilter(e.target.value ? Number(e.target.value) : null);
@@ -39,9 +56,19 @@ const CategoryProducts = () => {
     setPriceFilter(e.target.value);
   };
 
+  const handleCategoryChange = (e) => {
+    const value = e.target.value;
+    setCategoryFilter((prev) =>
+      prev.includes(value)
+        ? prev.filter((category) => category !== value)
+        : [...prev, value],
+    );
+  };
+
   const handleClearFilters = () => {
     setRatingFilter(null);
     setPriceFilter("lowToHigh");
+    setCategoryFilter([]);
     dispatch(clearFilters());
   };
 
@@ -78,6 +105,21 @@ const CategoryProducts = () => {
                   Clear
                 </span>
               </h5>
+              <div className="mb-4">
+                <h6 className="mb-3">Category</h6>
+                {categories.map((category) => (
+                  <div className="form-check" key={category}>
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      value={category}
+                      checked={categoryFilter.includes(category)}
+                      onChange={handleCategoryChange}
+                    />
+                    <label className="form-check-label">{category}</label>
+                  </div>
+                ))}
+              </div>
               <div className="mb-4">
                 <h6 className="mb-3">Rating</h6>
                 {[4, 3, 2, 1].map((star) => (

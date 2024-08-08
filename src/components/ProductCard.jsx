@@ -1,18 +1,15 @@
-import React from "react";
-
 const ProductCard = ({ product }) => {
   const { imageUrl, name, price, rating } = product;
 
   return (
-    <div className="card h-100 d-flex flex-row shadow-sm">
+    <div className="card d-flex flex-row">
       <div
-        className="d-flex justify-content-center align-items-center bg-light"
-        style={{ width: "200px", height: "226px" }}
+        className="d-flex justify-content-center align-items-center"
+        style={{ width: "200px", height: "226px", backgroundColor: "#f8f9fa" }}
       >
         <img
           src={imageUrl}
           alt={name || "Product Image"}
-          className="img-fluid"
           style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "cover" }}
         />
       </div>
@@ -20,6 +17,7 @@ const ProductCard = ({ product }) => {
         <h5 className="card-title">{name || "Unnamed Product"}</h5>
         <p className="card-text">
           <strong>${price || "N/A"}</strong>
+          <br />
         </p>
         <p className="card-text">Rating: {rating || "N/A"} stars</p>
         <div className="mt-auto">

@@ -1,3 +1,4 @@
+// productsSlice.js
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -20,6 +21,7 @@ const productsSlice = createSlice({
     filters: {
       rating: null,
       price: null,
+      categories: [],
     },
     status: "idle",
     error: null,
@@ -28,16 +30,18 @@ const productsSlice = createSlice({
     setFilters: (state, action) => {
       state.filters = action.payload;
       state.filteredProducts = state.products.filter((product) => {
-        const { rating } = state.filters;
+        const { rating, categories } = state.filters;
         const ratingMatch = !rating || product.rating >= rating;
-        // Remove category filter logic
-        return ratingMatch;
+        const categoryMatch =
+          categories.length === 0 || categories.includes(product.category);
+        return ratingMatch && categoryMatch;
       });
     },
     clearFilters: (state) => {
       state.filters = {
         rating: null,
         price: null,
+        categories: [],
       };
       state.filteredProducts = state.products;
     },

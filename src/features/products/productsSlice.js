@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// Async thunk to fetch products
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
@@ -15,8 +16,31 @@ const productsSlice = createSlice({
   name: "products",
   initialState: {
     products: [],
+    filteredProducts: [],
+    filters: {
+      rating: null,
+      price: null,
+    },
     status: "idle",
     error: null,
+  },
+  reducers: {
+    setFilters: (state, action) => {
+      state.filters = action.payload;
+      state.filteredProducts = state.products.filter((product) => {
+        const { rating } = state.filters;
+        const ratingMatch = !rating || product.rating >= rating;
+        // Remove category filter logic
+        return ratingMatch;
+      });
+    },
+    clearFilters: (state) => {
+      state.filters = {
+        rating: null,
+        price: null,
+      };
+      state.filteredProducts = state.products;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -26,6 +50,7 @@ const productsSlice = createSlice({
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.products = action.payload;
+        state.filteredProducts = action.payload; // Initialize filteredProducts
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = "failed";
@@ -34,4 +59,7 @@ const productsSlice = createSlice({
   },
 });
 
+export const { setFilters, clearFilters } = productsSlice.actions;
+
 export default productsSlice.reducer;
+

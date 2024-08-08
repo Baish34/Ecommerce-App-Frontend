@@ -27,6 +27,7 @@ const CategoryProducts = () => {
   const [categoryFilter, setCategoryFilter] = useState(
     filters.categories || [],
   );
+  const [searchTerm, setSearchTerm] = useState("");
 
   const categories = Array.from(
     new Set(products.map((product) => categoryMap[product.category])),
@@ -44,9 +45,10 @@ const CategoryProducts = () => {
         categories: categoryFilter.map((name) =>
           Object.keys(categoryMap).find((key) => categoryMap[key] === name),
         ),
+        searchTerm: searchTerm.trim().toLowerCase(),
       }),
     );
-  }, [dispatch, ratingFilter, priceFilter, categoryFilter]);
+  }, [dispatch, ratingFilter, priceFilter, categoryFilter, searchTerm]);
 
   const handleRatingChange = (e) => {
     setRatingFilter(e.target.value ? Number(e.target.value) : null);
@@ -69,19 +71,25 @@ const CategoryProducts = () => {
     setRatingFilter(null);
     setPriceFilter("lowToHigh");
     setCategoryFilter([]);
+    setSearchTerm(""); // Clear search term
     dispatch(clearFilters());
   };
 
+  // Filter products by search term
+  const filteredBySearch = filteredProducts.filter((product) =>
+    product.name.toLowerCase().includes(searchTerm.trim().toLowerCase()),
+  );
+
   // Sort products based on selected price filter
   const sortedProducts = React.useMemo(() => {
-    const sorted = [...filteredProducts];
+    const sorted = [...filteredBySearch];
     if (priceFilter === "lowToHigh") {
       sorted.sort((a, b) => a.price - b.price);
     } else if (priceFilter === "highToLow") {
       sorted.sort((a, b) => b.price - a.price);
     }
     return sorted;
-  }, [filteredProducts, priceFilter]);
+  }, [filteredBySearch, priceFilter]);
 
   if (status === "loading")
     return <div className="text-center my-5">Loading...</div>;
@@ -90,7 +98,7 @@ const CategoryProducts = () => {
 
   return (
     <div>
-      <Header />
+      <Header onSearch={setSearchTerm} /> {/* Pass the search handler */}
       <div className="container-fluid px-0">
         <div className="row gx-0">
           <div className="col-lg-3 mb-4">

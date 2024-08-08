@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-const Header = () => {
+const Header = ({ onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    onSearch(value); // Call the onSearch function with the updated search term
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault(); // Prevent form submission
+    onSearch(searchTerm); // Call the onSearch function with the current search term
+  };
+
   return (
     <header className="bg-white shadow-sm">
       <div className="container">
@@ -30,12 +43,15 @@ const Header = () => {
               <form
                 className="d-flex flex-grow-1 justify-content-center"
                 role="search"
+                onSubmit={handleSearchSubmit}
               >
                 <input
                   className="form-control me-2"
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
+                  value={searchTerm}
+                  onChange={handleSearchChange}
                   style={{ maxWidth: "250px" }}
                 />
                 <button className="btn btn-outline-danger" type="submit">
@@ -71,3 +87,4 @@ const Header = () => {
 };
 
 export default Header;
+

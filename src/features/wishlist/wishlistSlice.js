@@ -4,17 +4,17 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const fetchWishlist = createAsyncThunk('wishlist/fetchWishlist', async (userId) => {
-  const response = await axios.get(`/api/wishlist/${userId}`);
+  const response = await axios.get(`https://c7c43001-8c92-4c4e-a0de-050eac64989a-00-31tqe0fdcvd73.picard.replit.dev/api/wishlist/${userId}`);
   return response.data;
 });
 
 export const addToWishlist = createAsyncThunk('wishlist/addToWishlist', async ({ userId, product }) => {
-  const response = await axios.post(`/api/wishlist/${userId}`, product);
+  const response = await axios.post(`https://c7c43001-8c92-4c4e-a0de-050eac64989a-00-31tqe0fdcvd73.picard.replit.dev/api/wishlist/${userId}`, product);
   return response.data;
 });
 
 export const removeFromWishlist = createAsyncThunk('wishlist/removeFromWishlist', async ({ userId, productId }) => {
-  await axios.delete(`/api/wishlist/${userId}/${productId}`);
+  await axios.delete(`https://c7c43001-8c92-4c4e-a0de-050eac64989a-00-31tqe0fdcvd73.picard.replit.dev/api/wishlist/${userId}/${productId}`);
   return productId;
 });
 

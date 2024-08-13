@@ -1,12 +1,12 @@
-import { useDispatch } from 'react-redux';
-import { addToWishlist } from '../features/wishlist/wishlistSlice';
+import { useDispatch } from "react-redux";
+import { addToWishlist } from "../features/wishlist/wishlistSlice";
 
-const ProductCard = ({ product, userId }) => {
-  const { imageUrl, name, price, rating } = product;
+const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
+  const { _id, imageUrl, name, price, rating } = product;
 
   const handleAddToWishlist = () => {
-    dispatch(addToWishlist({ userId, product }));
+    dispatch(addToWishlist({ productId: _id }));
   };
 
   return (
@@ -16,7 +16,7 @@ const ProductCard = ({ product, userId }) => {
         style={{ width: "200px", height: "226px", backgroundColor: "#f8f9fa" }}
       >
         <img
-          src={imageUrl}
+          src={imageUrl || "path/to/default-image.jpg"}
           alt={name || "Product Image"}
           style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "cover" }}
         />
@@ -25,7 +25,6 @@ const ProductCard = ({ product, userId }) => {
         <h5 className="card-title">{name || "Unnamed Product"}</h5>
         <p className="card-text">
           <strong>${price || "N/A"}</strong>
-          <br />
         </p>
         <p className="card-text">Rating: {rating || "N/A"} stars</p>
         <div className="mt-auto">

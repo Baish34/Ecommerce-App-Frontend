@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 const Header = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const { userInfo } = useSelector((state) => state.user);
 
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
-    onSearch(value); // Call the onSearch function with the updated search term
+    onSearch(value);
   };
 
   const handleSearchSubmit = (e) => {
-    e.preventDefault(); // Prevent form submission
-    onSearch(searchTerm); // Call the onSearch function with the current search term
+    e.preventDefault();
+    onSearch(searchTerm);
   };
+
+  const isLoggedIn = userInfo && userInfo.length > 0;
 
   return (
     <header className="bg-white shadow-sm">
@@ -69,14 +73,16 @@ const Header = ({ onSearch }) => {
                     <i className="bi bi-heart"></i>
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link
-                    className="btn btn-outline-danger d-flex align-items-center"
-                    to="/login"
-                  >
-                    Login
-                  </Link>
-                </li>
+                {!isLoggedIn && (
+                  <li className="nav-item">
+                    <Link
+                      className="btn btn-outline-danger d-flex align-items-center"
+                      to="/login"
+                    >
+                      Login
+                    </Link>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
@@ -87,4 +93,5 @@ const Header = ({ onSearch }) => {
 };
 
 export default Header;
+
 

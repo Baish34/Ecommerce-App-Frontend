@@ -184,8 +184,8 @@ const CategoryProducts = () => {
               </h5>
               <div className="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
                 {sortedProducts.map((product) => (
-                  <div className="col mb-4" key={product._id.$oid}>
-                    <ProductCard product={product} />
+                  <div className="col mb-4" key={product._id}>
+                    <ProductCard product={product}  />
                   </div>
                 ))}
               </div>

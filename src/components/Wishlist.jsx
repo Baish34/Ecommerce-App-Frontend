@@ -44,7 +44,7 @@ const Wishlist = () => {
   return (
     <>
       <Header />
-      <div className="container my-5">
+      <div className="container my-4">
         <h2 className="text-center mb-4">Your Wishlist</h2>
         {wishlistItems.length > 0 ? (
           <div className="row">

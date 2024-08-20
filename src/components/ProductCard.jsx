@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { addToWishlist } from "../features/wishlist/wishlistSlice";
+import { addToCart } from "../features/cart/cartSlice";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
@@ -7,6 +8,10 @@ const ProductCard = ({ product }) => {
 
   const handleAddToWishlist = () => {
     dispatch(addToWishlist({ productId: _id }));
+  };
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({ productId: _id, quantity: 1 })); // Adds 1 item to the cart
   };
 
   return (
@@ -28,7 +33,12 @@ const ProductCard = ({ product }) => {
         </p>
         <p className="card-text">Rating: {rating || "N/A"} stars</p>
         <div className="mt-auto">
-          <button className="btn btn-primary w-100 mb-2">Add to Cart</button>
+          <button
+            className="btn btn-primary w-100 mb-2"
+            onClick={handleAddToCart}
+          >
+            Add to Cart
+          </button>
           <button
             className="btn btn-secondary w-100"
             onClick={handleAddToWishlist}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/user/userSlice";
 import { useNavigate } from "react-router-dom";
+import Header from "./Header";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -31,8 +32,11 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
+    <>
+      <Header />
+    <div className="container py-3">
+      <h1>Sign Up</h1>
+      <br />
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Email</label>
@@ -43,6 +47,7 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
+        <br />
         <div className="form-group">
           <label>Password</label>
           <input
@@ -52,6 +57,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        <br />
         <div className="form-group">
           <label>Phone Number</label>
           <input
@@ -61,6 +67,7 @@ const Login = () => {
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </div>
+        <br />
         <div className="form-group">
           <label>Name</label>
           <input
@@ -70,6 +77,7 @@ const Login = () => {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
+        <br />
         <button
           type="submit"
           className="btn btn-primary"
@@ -80,6 +88,7 @@ const Login = () => {
         {error && <div className="alert alert-danger">{error.message || error}</div>}
       </form>
     </div>
+      </>
   );
 };
 

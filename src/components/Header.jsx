@@ -79,7 +79,7 @@ const Header = ({ onSearch }) => {
                       className="btn btn-outline-danger d-flex align-items-center"
                       to="/login"
                     >
-                      Login
+                      Sign Up
                     </Link>
                   </li>
                 )}

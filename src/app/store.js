@@ -3,6 +3,7 @@ import categoriesReducer from "../features/categories/categoriesSlice";
 import productsReducer from "../features/products/productsSlice";
 import wishlistReducer from "../features/wishlist/wishlistSlice";
 import userReducer from "../features/user/userSlice";
+import cartReducer from "../features/cart/cartSlice";
 
 export default configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export default configureStore({
     products: productsReducer,
     wishlist: wishlistReducer,
     user: userReducer,
+    cart: cartReducer,
   },
 });

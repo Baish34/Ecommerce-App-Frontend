@@ -8,10 +8,12 @@ const ProductCard = ({ product }) => {
 
   const handleAddToWishlist = () => {
     dispatch(addToWishlist({ productId: _id }));
+    alert(`Your Product has been added to your wishlist.`);
   };
 
   const handleAddToCart = () => {
     dispatch(addToCart({ productId: _id, quantity: 1 })); // Adds 1 item to the cart
+    alert(`Your Product has been added to your cart.`);
   };
 
   return (
@@ -52,3 +54,4 @@ const ProductCard = ({ product }) => {
 };
 
 export default ProductCard;
+

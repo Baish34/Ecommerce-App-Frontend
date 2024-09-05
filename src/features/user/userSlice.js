@@ -3,7 +3,7 @@ import axios from 'axios'
 
 
 export const fetchUser = createAsyncThunk("user/fetchUser", async()=>{
-  const res = await axios.get("https://c7c43001-8c92-4c4e-a0de-050eac64989a-00-31tqe0fdcvd73.picard.replit.dev/api/users/users/66b5faf7915e6097eb68283c")
+  const res = await axios.get("ecommerce-app-backend-3rijbqvbc.vercel.app/api/users/users/66b5faf7915e6097eb68283c")
   return res.data
 })
 

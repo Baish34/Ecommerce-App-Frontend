@@ -6,7 +6,7 @@ const userId = "66b5faf7915e6097eb68283c";
 // Fetch cart for a user
 export const fetchCart = createAsyncThunk("cart/fetchCart", async () => {
   const response = await axios.get(
-    `https://c7c43001-8c92-4c4e-a0de-050eac64989a-00-31tqe0fdcvd73.picard.replit.dev/api/cart/${userId}`,
+    `ecommerce-app-backend-3rijbqvbc.vercel.app/api/cart/${userId}`,
   );
   console.log("Fetched cart items:", response.data.items);
   return response.data.items;
@@ -17,7 +17,7 @@ export const addToCart = createAsyncThunk(
   "cart/addToCart",
   async ({ productId, quantity }) => {
     const res = await axios.post(
-      `https://c7c43001-8c92-4c4e-a0de-050eac64989a-00-31tqe0fdcvd73.picard.replit.dev/api/cart/${userId}/items`,
+      `ecommerce-app-backend-3rijbqvbc.vercel.app/api/cart/${userId}/items`,
       { productId, quantity },
     );
     return res.data.items; // return the updated cart items array
@@ -29,7 +29,7 @@ export const removeFromCart = createAsyncThunk(
   "cart/removeFromCart",
   async (productId) => {
     await axios.delete(
-      `https://c7c43001-8c92-4c4e-a0de-050eac64989a-00-31tqe0fdcvd73.picard.replit.dev/api/cart/${userId}/cart/items/${productId}`,
+      `ecommerce-app-backend-3rijbqvbc.vercel.app/api/cart/${userId}/cart/items/${productId}`,
     );
     return productId;
   },
@@ -39,7 +39,7 @@ export const increaseQuantity = createAsyncThunk(
   "cart/increaseQuantity",
   async (productId) => {
     const response = await axios.post(
-      `https://c7c43001-8c92-4c4e-a0de-050eac64989a-00-31tqe0fdcvd73.picard.replit.dev/api/cart/carts/${userId}/items/${productId}/increase`,
+      `ecommerce-app-backend-3rijbqvbc.vercel.app/api/cart/carts/${userId}/items/${productId}/increase`,
     );
     return response.data;
   },
@@ -49,7 +49,7 @@ export const decreaseQuantity = createAsyncThunk(
   "cart/decreaseQuantity",
   async (productId) => {
     const response = await axios.post(
-      `https://c7c43001-8c92-4c4e-a0de-050eac64989a-00-31tqe0fdcvd73.picard.replit.dev/api/cart/carts/${userId}/items/${productId}/decrease`,
+      `ecommerce-app-backend-3rijbqvbc.vercel.app/api/cart/carts/${userId}/items/${productId}/decrease`,
     );
     return response.data;
   },
@@ -60,11 +60,11 @@ export const moveToWishlist = createAsyncThunk(
   "cart/moveToWishlist",
   async ({ productId }) => {
     await axios.post(
-      `https://c7c43001-8c92-4c4e-a0de-050eac64989a-00-31tqe0fdcvd73.picard.replit.dev/api/cart/${userId}/wishlist/items`,
+      `ecommerce-app-backend-3rijbqvbc.vercel.app/api/cart/${userId}/wishlist/items`,
       { productId },
     );
     await axios.delete(
-      `https://c7c43001-8c92-4c4e-a0de-050eac64989a-00-31tqe0fdcvd73.picard.replit.dev/api/cart/${userId}/items/${productId}`,
+      `ecommerce-app-backend-3rijbqvbc.vercel.app/api/cart/${userId}/items/${productId}`,
     );
     return productId;
   },

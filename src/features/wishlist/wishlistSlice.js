@@ -3,18 +3,18 @@ import axios from 'axios';
 
 // Fetch wishlist for a user
 export const fetchWishlist = createAsyncThunk("wishlists/fetchWishlist", async()=>{
-  const response = await axios.get("https://c7c43001-8c92-4c4e-a0de-050eac64989a-00-31tqe0fdcvd73.picard.replit.dev/api/wishlist/wishlists/66b5faf7915e6097eb68283c")
+  const response = await axios.get("ecommerce-app-backend-3rijbqvbc.vercel.app/api/wishlist/wishlists/66b5faf7915e6097eb68283c")
   console.log(response)
   return response.data.items;
 })
 
 export const addToWishlist = createAsyncThunk("wishlists/addToWishlist", async ({productId})=>{
-  const res = await axios.post("https://c7c43001-8c92-4c4e-a0de-050eac64989a-00-31tqe0fdcvd73.picard.replit.dev/api/wishlist/wishlists/66b5faf7915e6097eb68283c/items", {productId})
+  const res = await axios.post("ecommerce-app-backend-3rijbqvbc.vercel.app/api/wishlist/wishlists/66b5faf7915e6097eb68283c/items", {productId})
   return res.data
 })
 
 export const deleteWishlistItem = createAsyncThunk("wishlists/deleteWishlistItem", async (productId) => {
-  await axios.delete(`https://c7c43001-8c92-4c4e-a0de-050eac64989a-00-31tqe0fdcvd73.picard.replit.dev/api/wishlist/wishlists/66b5faf7915e6097eb68283c/items/${productId}`);
+  await axios.delete(`ecommerce-app-backend-3rijbqvbc.vercel.app/api/wishlist/wishlists/66b5faf7915e6097eb68283c/items/${productId}`);
   return productId;
 });
 

@@ -39,7 +39,7 @@ const Home = () => {
       </div>
       <div className="container pt-3">
         <img
-          src="/image1.jpg"
+          src="/images/image1.jpg"
           className="img-fluid"
           alt="banner"
           style={{ width: "1200px", height: "350px" }}

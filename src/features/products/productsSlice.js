@@ -7,7 +7,7 @@ export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
     const response = await axios.get(
-      "https://c7c43001-8c92-4c4e-a0de-050eac64989a-00-31tqe0fdcvd73.picard.replit.dev/api/products",
+      "https://ecommerce-app-backend-three.vercel.app/api/products",
     );
     return response.data;
   },

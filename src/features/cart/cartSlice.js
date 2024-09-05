@@ -6,7 +6,7 @@ const userId = "66b5faf7915e6097eb68283c";
 // Fetch cart for a user
 export const fetchCart = createAsyncThunk("cart/fetchCart", async () => {
   const response = await axios.get(
-    `ecommerce-app-backend-three.vercel.app/api/cart/${userId}`,
+    `https://ecommerce-app-backend-three.vercel.app/api/cart/${userId}`,
   );
   console.log("Fetched cart items:", response.data.items);
   return response.data.items;
@@ -17,7 +17,7 @@ export const addToCart = createAsyncThunk(
   "cart/addToCart",
   async ({ productId, quantity }) => {
     const res = await axios.post(
-      `ecommerce-app-backend-three.vercel.app/api/cart/${userId}/items`,
+      `https://ecommerce-app-backend-three.vercel.app/api/cart/${userId}/items`,
       { productId, quantity },
     );
     return res.data.items; // return the updated cart items array
@@ -29,7 +29,7 @@ export const removeFromCart = createAsyncThunk(
   "cart/removeFromCart",
   async (productId) => {
     await axios.delete(
-      `ecommerce-app-backend-three.vercel.app/api/cart/${userId}/cart/items/${productId}`,
+      `https://ecommerce-app-backend-three.vercel.app/api/cart/${userId}/cart/items/${productId}`,
     );
     return productId;
   },
@@ -39,7 +39,7 @@ export const increaseQuantity = createAsyncThunk(
   "cart/increaseQuantity",
   async (productId) => {
     const response = await axios.post(
-      `ecommerce-app-backend-three.vercel.app/api/cart/carts/${userId}/items/${productId}/increase`,
+      `https://ecommerce-app-backend-three.vercel.app/api/cart/carts/${userId}/items/${productId}/increase`,
     );
     return response.data;
   },
@@ -49,7 +49,7 @@ export const decreaseQuantity = createAsyncThunk(
   "cart/decreaseQuantity",
   async (productId) => {
     const response = await axios.post(
-      `ecommerce-app-backend-three.vercel.app/api/cart/carts/${userId}/items/${productId}/decrease`,
+      `https://ecommerce-app-backend-three.vercel.app/api/cart/carts/${userId}/items/${productId}/decrease`,
     );
     return response.data;
   },
@@ -60,11 +60,11 @@ export const moveToWishlist = createAsyncThunk(
   "cart/moveToWishlist",
   async ({ productId }) => {
     await axios.post(
-      `ecommerce-app-backend-three.vercel.app/api/cart/${userId}/wishlist/items`,
+      `https://ecommerce-app-backend-three.vercel.app/api/cart/${userId}/wishlist/items`,
       { productId },
     );
     await axios.delete(
-      `ecommerce-app-backend-three.vercel.app/api/cart/${userId}/items/${productId}`,
+      `https://ecommerce-app-backend-three.vercel.app/api/cart/${userId}/items/${productId}`,
     );
     return productId;
   },

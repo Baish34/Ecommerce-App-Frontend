@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
   const res = await axios.get(
-    "ecommerce-app-backend-three.vercel.app/api/users/users/66b5faf7915e6097eb68283c",
+    "https://ecommerce-app-backend-three.vercel.app/api/users/users/66b5faf7915e6097eb68283c",
   );
   return res.data;
 });

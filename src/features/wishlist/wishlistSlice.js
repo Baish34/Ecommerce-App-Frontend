@@ -3,18 +3,18 @@ import axios from 'axios';
 
 // Fetch wishlist for a user
 export const fetchWishlist = createAsyncThunk("wishlists/fetchWishlist", async()=>{
-  const response = await axios.get("ecommerce-app-backend-three.vercel.app/api/wishlist/wishlists/66b5faf7915e6097eb68283c")
+  const response = await axios.get("https://ecommerce-app-backend-three.vercel.app/api/wishlist/wishlists/66b5faf7915e6097eb68283c")
   console.log(response)
   return response.data.items;
 })
 
 export const addToWishlist = createAsyncThunk("wishlists/addToWishlist", async ({productId})=>{
-  const res = await axios.post("ecommerce-app-backend-three.vercel.app/api/wishlist/wishlists/66b5faf7915e6097eb68283c/items", {productId})
+  const res = await axios.post("https://ecommerce-app-backend-three.vercel.app/api/wishlist/wishlists/66b5faf7915e6097eb68283c/items", {productId})
   return res.data
 })
 
 export const deleteWishlistItem = createAsyncThunk("wishlists/deleteWishlistItem", async (productId) => {
-  await axios.delete(`ecommerce-app-backend-three.vercel.app/api/wishlist/wishlists/66b5faf7915e6097eb68283c/items/${productId}`);
+  await axios.delete(`https://ecommerce-app-backend-three.vercel.app/api/wishlist/wishlists/66b5faf7915e6097eb68283c/items/${productId}`);
   return productId;
 });
 

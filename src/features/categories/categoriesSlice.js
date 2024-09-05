@@ -5,7 +5,7 @@ export const fetchCategories = createAsyncThunk(
   "categories/fetchCategories",
   async () => {
     const response = await axios.get(
-      "ecommerce-app-backend-three.vercel.app/api/categories",
+      "https://ecommerce-app-backend-three.vercel.app/api/categories",
     );
     return response.data;
   },
